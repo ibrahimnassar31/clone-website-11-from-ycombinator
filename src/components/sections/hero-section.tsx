@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import * as THREE from "three";
-import NET from "vanta/dist/vanta.net.min"; 
+// @ts-ignore
+import NET from "vanta/dist/vanta.net.min";
+
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -34,7 +34,7 @@ const HeroSection = () => {
         scale: 1.00,
         scaleMobile: 1.00,
         color: 0x7c3aed,
-        backgroundColor: 0xe0e7ff,
+        backgroundColor: 0x7c3aec,
         points: 12.00,
         maxDistance: 25.00,
         spacing: 18.00
@@ -42,7 +42,6 @@ const HeroSection = () => {
     }
 
     const ctx = gsap.context(() => {
-      // Tagline: fade in with scale
       gsap.from(taglineRef.current, {
         opacity: 0,
         scale: 0.9,
@@ -51,7 +50,6 @@ const HeroSection = () => {
         delay: 0.2,
       });
 
-      // Heading: bidirectional word stagger
       if (headingRef.current) {
         const split = new SplitText(headingRef.current, { type: "words" });
         gsap.from(split.words, {
@@ -64,7 +62,6 @@ const HeroSection = () => {
         });
       }
 
-      // Paragraphs: slide from opposite sides
       gsap.from(para1Ref.current, {
         x: -80,
         opacity: 0,
@@ -80,7 +77,6 @@ const HeroSection = () => {
         delay: 1.0,
       });
 
-      // Button: bounce in from bottom
       gsap.from(buttonRef.current, {
         y: 50,
         opacity: 0,
@@ -89,7 +85,6 @@ const HeroSection = () => {
         delay: 1.2,
       });
 
-      // Hover for button: scale and shadow
       const hoverTl = gsap.timeline({ paused: true });
       hoverTl.to(buttonRef.current, {
         scale: 1.05,
@@ -113,9 +108,7 @@ const HeroSection = () => {
       className="relative overflow-hidden w-full h-full min-h-[700px] pb-24 flex items-center justify-center bg-gradient-to-br  from-purple-900 via-indigo-900 to-purple-700"
       aria-label="Hero Section"
     >
-      {/* Vanta Net Background */}
       <div ref={vantaRef} className="absolute inset-0 z-0" />
-      {/* Decorative SVG Overlay */}
       <svg className="absolute left-0 top-0 w-full h-full pointer-events-none z-10" aria-hidden="true">
         <defs>
           <radialGradient id="heroGradient" cx="50%" cy="50%" r="80%" fx="50%" fy="50%">
@@ -127,7 +120,6 @@ const HeroSection = () => {
       </svg>
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8 pt-32 pb-24 sm:pt-40 sm:pb-32 lg:pt-48 lg:pb-40 z-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-24 gap-y-16 lg:items-center">
-          {/* Left: Textual Content */}
           <div className="flex flex-col items-start gap-y-8">
             <div
               ref={taglineRef}
@@ -141,24 +133,24 @@ const HeroSection = () => {
             </div>
             <h1
               ref={headingRef}
-              className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight text-white drop-shadow-lg leading-tight"
+              className="text-4xl sm:text-5xl lg:text-[3.5rem] font-extrabold tracking-tight text-white drop-shadow-lg leading-tight backdrop-blur-3xl p-4 rounded-3xl"
               style={{ textShadow: '0 2px 24px #7c3aed55' }}
             >
+              
               Personalized preclinical studies with a CRO like no other
             </h1>
           </div>
-          {/* Right: Description & CTA */}
           <div className="flex flex-col justify-center items-start space-y-8">
-            <div className="space-y-6">
+            <div className="space-y-6 ">
               <p
                 ref={para1Ref}
-                className="text-lg lg:text-xl leading-8 text-white/90 font-medium max-w-xl animate-slideInLeft"
+                className="text-lg lg:text-xl leading-8 text-white/90 font-medium max-w-xl animate-slideInLeft backdrop-blur-3xl p-3 rounded-3xl"
               >
                 At <span className="font-bold text-purple-200">TransCure bioServices</span>, we combine innovative expertise and personalized support to develop the therapies of tomorrow.
-              </p>
+              </p> 
               <p
                 ref={para2Ref}
-                className="text-lg lg:text-xl leading-8 text-white/90 font-medium max-w-xl animate-slideInRight"
+                className="text-lg lg:text-xl leading-8 text-white/90 font-medium max-w-xl animate-slideInRight backdrop-blur-3xl p-3 rounded-3xl  "
               >
                 With a commitment to <span className="font-bold text-purple-200">flexibility</span> and <span className="font-bold text-purple-200">transparency</span>, we leverage advanced mouse models to accelerate your research and drive your discoveries forward.
               </p>
